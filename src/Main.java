@@ -1,8 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-
-public class Main {
-
+public class Main{
     public static void main(String[] args) {
         // Create a JPanel object
         JFrame frame = new JFrame("Bank Interface");
@@ -30,12 +28,22 @@ public class Main {
 
         JButton setBalanceButton = new JButton("Enter Balance");
         JButton depositButton = new JButton("Enter Deposit Amount");
-        JButton withdrawCashButton = new JButton("Enter Withdrawal Amount");
+        JButton withdrawalButton = new JButton("Enter Withdrawal Amount");
 
         balancePanel.add(setBalanceButton);
         depositPanel.add(depositButton);
-        withdrawalPanel.add(withdrawCashButton);
+        withdrawalPanel.add(withdrawalButton);
+
+
+        BankInterface listenerSetBalance = new BankInterface();
+        BankInterface listenerDeposit = new BankInterface();
+        BankInterface listenerWithdraw = new BankInterface();
+
+        setBalanceButton.addActionListener(listenerSetBalance);
+        depositButton.addActionListener(listenerDeposit);
+        withdrawalButton.addActionListener(listenerWithdraw);
+
+
 
         frame.setVisible(true);
-        b.addActionListener(this);
     }}
