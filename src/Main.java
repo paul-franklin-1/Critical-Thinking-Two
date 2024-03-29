@@ -5,7 +5,7 @@ public class Main {
 
     public static void main(String[] args) {
         // Create a JPanel object
-       JFrame frame = new JFrame("Bank Interface");
+       JFrame frame  = new JFrame("Bank Interface");
         frame.setSize(1000, 700);
         frame.setLayout(new FlowLayout());
         JPanel balancePanel = new JPanel();
