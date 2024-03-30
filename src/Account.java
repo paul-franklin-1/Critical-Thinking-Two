@@ -23,13 +23,13 @@ public class Account {
 
         JTextField currentBalanceField = new JTextField("Current Balance");
         JTextField enterBalanceField = new JTextField("Enter Balance:");
-        JTextField depositCashField = new JTextField("Enter Deposit Amount:");
-        JTextField withdrawField = new JTextField("Enter Withdrawal Amount:");
+        JTextField depositField = new JTextField("Enter Deposit Amount:");
+        JTextField withdrawalField = new JTextField("Enter Withdrawal Amount:");
 
         balancePanel.add(currentBalanceField);
         balancePanel.add(enterBalanceField);
-        depositPanel.add(depositCashField);
-        withdrawalPanel.add(withdrawField);
+        depositPanel.add(depositField);
+        withdrawalPanel.add(withdrawalField);
 
         JButton setBalanceButton = new JButton("Enter Balance");
         JButton depositButton = new JButton("Enter Deposit Amount");
@@ -50,10 +50,16 @@ public class Account {
                 Object source = e.getSource();
                 if (source == setBalanceButton){
                     balance = Double.parseDouble(enterBalanceField.getText());
-                    str = String.format("Current Balance: %.2f",balance);
-                    ;
-                }
-            }};
+                    str = String.format("Current Balance: %.2f",balance);}
+                else if (source == depositButton){
+                    double depositAmount = Double.parseDouble(depositField.getText());
+                    balance = depositAmount + balance;
+                    str = String.format("Current Balance: %.2f",balance);}
+                else if (source == withdrawalButton){
+                    double withdrawalAmount = Double.parseDouble(withdrawalField.getText());
+                    balance = balance - withdrawalAmount;
+                    str = String.format("Current Balance: %.2f",balance);}
+                else{ str = "Error";}}};
 
         setBalanceButton.addActionListener(listener);
         depositButton.addActionListener(listener);
