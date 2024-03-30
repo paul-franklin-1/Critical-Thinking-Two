@@ -1,6 +1,8 @@
 import javax.swing.*;
-
+import java.awt.event.*;
 public class Account {
+    public static double balance;
+    public static String str = "Current Balance: $0.00";
     public static void main(String[] args) {
         JFrame frame = new JFrame("Bank Interface");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -37,14 +39,26 @@ public class Account {
         depositPanel.add(depositButton);
         withdrawalPanel.add(withdrawalButton);
 
+        JLabel label = new JLabel(str);
+        frame.add(label);
+
         frame.setVisible(true);
-        }}
 
-        /*BankInterface listenerSetBalance = new BankInterface();
-        BankInterface listenerDeposit = new BankInterface();
-        BankInterface listenerWithdraw = new BankInterface();
+        ActionListener listener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Object source = e.getSource();
+                if (source == setBalanceButton){
+                    balance = Double.parseDouble(enterBalanceField.getText());
+                    str = String.format("Current Balance: %.2f",balance);
+                    ;
+                }
+            }};
 
-        setBalanceButton.addActionListener(listenerSetBalance);
-        depositButton.addActionListener(listenerDeposit);
-        withdrawalButton.addActionListener(listenerWithdraw);*/
+        setBalanceButton.addActionListener(listener);
+        depositButton.addActionListener(listener);
+        withdrawalButton.addActionListener(listener);
+
+
+    }}
 
