@@ -1,6 +1,6 @@
 import javax.swing.*;
 
-public class listener {
+/*public class listener {
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("My GUI");
@@ -18,4 +18,4 @@ public class listener {
         frame.setSize(300, 300);
         frame.setVisible(true);
     }
-}
+}*/
