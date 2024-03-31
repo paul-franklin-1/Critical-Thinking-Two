@@ -8,38 +8,41 @@ public class Account {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Bank Interface");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(new BorderLayout());
-        frame.setSize(350, 350);
+        frame.setSize(500, 350);
+        frame.setLayout(new FlowLayout(FlowLayout.CENTER));
 
         JPanel mainPanel = new JPanel();
-
-        frame.add(mainPanel);
-
-        JTextField enterBalanceField = new JTextField("Type Balance");
-        JTextField depositField = new JTextField("Type Deposit Amount");
-        JTextField withdrawalField = new JTextField("Type Withdrawal Amount");
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
         String strSetBalanceButton = "<html><center>Submit<br>Balance</center></html>";
         String strDepositButton = "<html><center>Submit<br>Deposit</center></html>";
         String strWithdrawalButton = "<html><center>Submit<br>Withdrawal</center></html>";
 
+        UIManager.put("Button.font", new Font("Georgia", Font.BOLD, 25));
+        UIManager.put("Label.font", new Font("Impact", Font.PLAIN, 35));
+        UIManager.put("TextField.font", new Font("Georgia", Font.PLAIN, 20));
+
+        JTextField enterBalanceField = new JTextField("Type Balance");
+        JTextField depositField = new JTextField("Type Deposit Amount");
+        JTextField withdrawalField = new JTextField("Type Withdrawal Amount");
+
         JButton setBalanceButton = new JButton(strSetBalanceButton);
         JButton depositButton = new JButton(strDepositButton);
         JButton withdrawalButton = new JButton(strWithdrawalButton);
 
-        setBalanceButton.setPreferredSize(new Dimension(150, 75));
-        depositButton.setPreferredSize(new Dimension(150, 75));
-        withdrawalButton.setPreferredSize(new Dimension(150, 75));
+        setBalanceButton.setPreferredSize(new Dimension(225, 105));
+        depositButton.setPreferredSize(new Dimension(225, 105));
+        withdrawalButton.setPreferredSize(new Dimension(225, 105));
 
         mainPanel.add(enterBalanceField);
-        mainPanel.add(setBalanceButton,BorderLayout.EAST);
+        mainPanel.add(setBalanceButton);
         mainPanel.add(depositField);
-        mainPanel.add(depositButton,BorderLayout.EAST);
+        mainPanel.add(depositButton);
         mainPanel.add(withdrawalField);
-        mainPanel.add(withdrawalButton,BorderLayout.EAST);
+        mainPanel.add(withdrawalButton);
 
         JLabel label = new JLabel("Current Balance: $0.00");
-        mainPanel.add(label);
+
         ActionListener listener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -60,7 +63,8 @@ public class Account {
         setBalanceButton.addActionListener(listener);
         depositButton.addActionListener(listener);
         withdrawalButton.addActionListener(listener);
-        //frame.pack();
+        frame.add(mainPanel);
+        frame.add(label);
         frame.setVisible(true);
 
 
