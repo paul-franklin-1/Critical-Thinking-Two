@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 public class Account {
     public static double balance;
@@ -16,16 +17,19 @@ public class Account {
         JTextField depositField = new JTextField("Enter Deposit Amount:");
         JTextField withdrawalField = new JTextField("Enter Withdrawal Amount:");
 
-        mainPanel.add(enterBalanceField);
-        mainPanel.add(depositField);
-        mainPanel.add(withdrawalField);
-
         JButton setBalanceButton = new JButton("Enter Balance");
         JButton depositButton = new JButton("Enter Deposit Amount");
         JButton withdrawalButton = new JButton("Enter Withdrawal Amount");
 
+        setBalanceButton.setPreferredSize(new Dimension(150, 75));
+        depositButton.setPreferredSize(new Dimension(150, 75));
+        withdrawalButton.setPreferredSize(new Dimension(150, 75));
+
+        mainPanel.add(enterBalanceField);
         mainPanel.add(setBalanceButton);
+        mainPanel.add(depositField);
         mainPanel.add(depositButton);
+        mainPanel.add(withdrawalField);
         mainPanel.add(withdrawalButton);
 
         JLabel label = new JLabel("Current Balance: $0.00");
@@ -36,15 +40,15 @@ public class Account {
                 Object source = e.getSource();
                 if (source == setBalanceButton){
                     balance = Double.parseDouble(enterBalanceField.getText());
-                    label.setText(String.format("Current Balance: %.2f",balance));}
+                    label.setText(String.format("Current Balance: $%.2f",balance));}
                 else if (source == depositButton){
                     double depositAmount = Double.parseDouble(depositField.getText());
                     balance = depositAmount + balance;
-                    label.setText(String.format("Current Balance: %.2f",balance));}
+                    label.setText(String.format("Current Balance: $%.2f",balance));}
                 else if (source == withdrawalButton){
                     double withdrawalAmount = Double.parseDouble(withdrawalField.getText());
                     balance = balance - withdrawalAmount;
-                    label.setText(String.format("Current Balance: %.2f",balance));}
+                    label.setText(String.format("Current Balance: $%.2f",balance));}
                 else{ label.setText("Error. Please try again.");}}};
 
         setBalanceButton.addActionListener(listener);
