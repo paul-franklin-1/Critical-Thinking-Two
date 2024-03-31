@@ -17,9 +17,13 @@ public class Account {
         JTextField depositField = new JTextField("Enter Deposit Amount:");
         JTextField withdrawalField = new JTextField("Enter Withdrawal Amount:");
 
-        JButton setBalanceButton = new JButton("Enter Balance");
-        JButton depositButton = new JButton("Enter Deposit Amount");
-        JButton withdrawalButton = new JButton("Enter Withdrawal Amount");
+        String strSetBalanceButton = "<html>Submit<br />Balance</html>";
+        String strDepositButton = "<html>Submit<br />Deposit</html>";
+        String strWithdrawalButton = "<html>Submit<br />Withdrawal</html>";
+
+        JButton setBalanceButton = new JButton(strSetBalanceButton);
+        JButton depositButton = new JButton(strDepositButton);
+        JButton withdrawalButton = new JButton(strWithdrawalButton);
 
         setBalanceButton.setPreferredSize(new Dimension(150, 75));
         depositButton.setPreferredSize(new Dimension(150, 75));
@@ -54,7 +58,7 @@ public class Account {
         setBalanceButton.addActionListener(listener);
         depositButton.addActionListener(listener);
         withdrawalButton.addActionListener(listener);
-        frame.pack();
+        //frame.pack();
         frame.setVisible(true);
 
 
