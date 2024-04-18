@@ -3,9 +3,8 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Account {
-    //set fields for account balance ("balance") and for String of initial current balance ("str")
+    //set field for account balance ("balance")
     public static double balance;
-    public static String str = "Current Balance: $0.00";
 
     //all subsequent code is contained in main method
     public static void main(String[] args) {
@@ -13,7 +12,7 @@ public class Account {
         //create first and only JFrame, set title, size, layout, and default close operation of frame
         JFrame frame = new JFrame("Bank Interface");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 350);
+        frame.setSize(950, 650);
         frame.setLayout(new FlowLayout(FlowLayout.CENTER));
 
         //create first and only JPanel, set the layout
@@ -28,6 +27,7 @@ public class Account {
         //set the font, size, and style for all buttons, labels, and text fields that are subsequently created
         UIManager.put("Button.font", new Font("Georgia", Font.BOLD, 32));
         UIManager.put("Label.font", new Font("Impact", Font.PLAIN, 30));
+        UIManager.put("labelExceptions.font", new Font("Georgia", Font.ITALIC, 32));
         UIManager.put("TextField.font", new Font("Georgia", Font.PLAIN, 27));
 
         //create all JTextFields that will accept numeric user input. Also, 3 empty JTextFields for spacing
@@ -62,6 +62,7 @@ public class Account {
         //create a single label to display the current account balance to the user, so that
         //when user makes changes to the balance, the label is updated to display the changed balance
         JLabel label = new JLabel("Current Balance: $0.00");
+        JLabel labelExceptions = new JLabel("");
 
         //initialize action listener to detect a clicked button and detect which button is the click source
         ActionListener listener = new ActionListener() {
@@ -71,27 +72,38 @@ public class Account {
                 //through branching, direct the program to modify
                 //account balance based on source of user clicks, and
                 //employ String interpolation for text in "current balance" label: $#.##
-                if (source == setBalanceButton){
-                    balance = Double.parseDouble(enterBalanceField.getText());
-                    label.setText(String.format("Current Balance: $%.2f",balance));}
+                if (source == setBalanceButton) {
+                    try {
+                        balance = Double.parseDouble(enterBalanceField.getText());
+                        label.setText(String.format("Current Balance: $%.2f", balance));
+                    } catch (NumberFormatException e2) {
+                        labelExceptions.setText("Error: Enter valid double value. " + e2.getMessage());
+                    }}
                 else if (source == depositButton){
-                    double depositAmount = Double.parseDouble(depositField.getText());
-                    balance = depositAmount + balance;
-                    label.setText(String.format("Current Balance: $%.2f",balance));}
+                    try {
+                        double depositAmount = Double.parseDouble(depositField.getText());
+                        balance = depositAmount + balance;
+                        label.setText(String.format("Current Balance: $%.2f", balance));
+                    } catch (NumberFormatException e3) {
+                        labelExceptions.setText("Error: Enter valid double value. " + e3.getMessage());
+                    }}
                 else if (source == withdrawalButton){
-                    double withdrawalAmount = Double.parseDouble(withdrawalField.getText());
-                    balance = balance - withdrawalAmount;
-                    label.setText(String.format("Current Balance: $%.2f",balance));}
-                else{ label.setText("Error. Please try again.");}}};
+                    try {
+                        double withdrawalAmount = Double.parseDouble(withdrawalField.getText());
+                        balance = balance - withdrawalAmount;
+                        label.setText(String.format("Current Balance: $%.2f",balance));
+                    } catch (NumberFormatException e4) {
+                        labelExceptions.setText("Error: Enter valid double value. " + e4.getMessage());
+                    }}}};
 
         //set action listener "listener" to all three buttons
         setBalanceButton.addActionListener(listener);
         depositButton.addActionListener(listener);
         withdrawalButton.addActionListener(listener);
 
-        //finally, add panel to frame, add label to frame, apply pack() function, and set frame as visible
+        //finally, add panel to frame, add label to frame, and set frame as visible
         frame.add(mainPanel);
         frame.add(label);
-        frame.pack();
+        frame.add(labelExceptions);
         frame.setVisible(true);
     }}
